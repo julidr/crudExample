@@ -22,4 +22,41 @@ router.post('/createCategory', function(req, res){
   });
 });
 
+router.get('/listCategories', function(req, res) {
+  categoriesModel.listCategories(function(error, response){
+    if(error){
+      console.log(error);
+      res.render('categories/listCategories', {listCategories: [], error: "No hay registro de categorias"});
+    } else{
+      var listCategories = [];
+      listCategories = response || [];
+      console.log(response);
+      res.render('categories/listCategories', {listCategories: listCategories});
+    }
+  });
+});
+
+router.post('/deleteCategory', function(req, res){
+  var id = req.body.id
+  categoriesModel.deleteCategory(id, function(error, response){
+    if(error){
+      console.log(error);
+      res.render('categories/listCategories', {listCategories: listCategories, error: "Error en eliminar Categoria"});
+    } else {
+      console.log(response);
+          categoriesModel.listCategories(function(error, response){
+              if(error){
+                  console.log(error);
+                  res.render('categories/listCategories', {listCategories: [], error: "No hay registro de categorias"});
+              } else{
+                  var listCategories = [];
+                  listCategories = response || [];
+                  console.log(response);
+                  res.render('categories/listCategories', {listCategories: listCategories});
+              }
+            });
+    }
+  });
+});
+
 module.exports = router;

@@ -5,12 +5,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <title>Create Category</title>
+    <title>List Categories</title>
 
     <!-- Bootstrap -->
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link href="css/myStyle.css" rel='stylesheet' >
+    <link href="https://cdn.datatables.net/1.10.13/css/jquery.dataTables.min.css" rel='stylesheet' >
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -20,23 +21,29 @@
   </head>
   <body>
     <div class="container">
-        <div class="col-md-5">
-            <div class="form-area">  
-                <form action= "/createCategory" method="POST" role="form">
-                    <br style="clear:both">
-                    <h3 style="margin-bottom: 25px; text-align: center;">Category Form</h3>
-                    <div class="form-group">
-                        <input type="text" class="form-control" id="category_name" name="category_name" placeholder="Insert Category Name" required>
-                    </div>
-                    <button type="submit" id="submit" name="submit" class="btn btn-primary pull-right">Submit Form</button>
-                </form>
-            </div>
-                <% if (typeof mensaje !== 'undefined') { %>
-                    <div class="alert alert-success" id="alert">
-                        <h4 id="message-alert"><%= mensaje %></h4>
-                    </div>
-                 <% } %>
-        </div>
+        <table id="categoriesTable" class="display">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Category</th>
+                    <th>Delete</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% listCategories.forEach(function(category){ %>
+                    <tr>
+                        <td><%= category.category_id %></td>
+                        <td><%= category.category_name %></td>
+                        <td>
+                            <form method = "POST" action="/deleteCategory">
+                                <input type="hidden" id="id" name="id" value="<%= category.category_id %>">
+                                <button type="submit" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-trash"> Delete</button>
+                            </form>
+                        </td>
+                    </tr>
+               <% }); %>
+            </tbody>
+        </table>
     </div>
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
@@ -44,5 +51,7 @@
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <!-- Latest compiled and minified JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <script src="https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"></script>
+    <script src="javascripts/init.js"></script>
   </body>
 </html>
