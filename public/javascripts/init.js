@@ -2,7 +2,7 @@ $(document).ready(function(){
     
     $('#categoriesTable').DataTable();
 
-    $('.edit_btn').on("click",function(){
+    $('#categoriesTable').on("click",".edit_btn",function(){
         $("#category_id").val($(this).data("code"));
         $("#category_name").val($(this).data("name"));
         $("#categoriesModal").modal("show");
