@@ -59,4 +59,30 @@ router.post('/deleteCategory', function(req, res){
   });
 });
 
+router.post('/editCategory', function(req, res){
+  var categoryData = {
+    category_id: req.body.category_id,
+    category_name: req.body.category_name
+  }
+  categoriesModel.editCategory(categoryData, function(error, response){
+    if(error){
+      console.log(error);
+      res.render('categories/listCategories', {listCategories: listCategories, error: "Error en editar Categoria"});
+    } else {
+      console.log(response);
+          categoriesModel.listCategories(function(error, response){
+              if(error){
+                  console.log(error);
+                  res.render('categories/listCategories', {listCategories: [], error: "No hay registro de categorias"});
+              } else{
+                  var listCategories = [];
+                  listCategories = response || [];
+                  console.log(response);
+                  res.render('categories/listCategories', {listCategories: listCategories});
+              }
+            });
+    }
+  });
+});
+
 module.exports = router;

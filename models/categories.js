@@ -45,4 +45,17 @@ categoriesModel.deleteCategory = function(id, callback){
     }
 }
 
+categoriesModel.editCategory=function(categoryData, callback){
+     if(connection){
+        connection.query('UPDATE categories SET category_name='+connection.escape(categoryData.category_name)+"WHERE category_id="+connection.escape(categoryData.category_id), 
+        function(error, result){
+            if(error){
+                callback(error, null);
+            } else {
+                callback(null, {id:0});
+            }
+        });
+    }
+}
+
 module.exports = categoriesModel;
