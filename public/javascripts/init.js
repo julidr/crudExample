@@ -12,4 +12,5 @@ $(document).ready(function(){
         $("#category_id").prop("disabled",false);
         $("#edit_form").submit();
     });
+
 });
