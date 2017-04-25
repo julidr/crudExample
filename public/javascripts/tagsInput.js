@@ -22,4 +22,29 @@
                 types: 'number'
             });
             webshims.polyfill('forms forms-ext');
+
+            $("#sendForm").on("click",function(){
+                var productsData = {
+                    name: $("#name").val(),
+                    price: $("#price").val(),
+                    available: $("#available").prop('checked'),
+                    best_seller: $("#best_seller").prop('checked'),
+                    image: $("#image").val(),
+                    description: $("#description").val(),
+                    categories: $("#categories").tagsinput("items")
+                }
+                console.log(productsData);
+                $.ajax({
+                    type: 'POST',
+                    url: '/createProduct',
+                    dataType: "json",
+                    data: {info: JSON.stringify(productsData)},
+                    done: function(data){
+                        alert("Data Loaded: " + data);
+                    },
+                    error: function(data){
+                        console.log("Error: " + JSON.stringify(data));
+                    }
+                });
+            })
         });

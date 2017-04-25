@@ -17,4 +17,11 @@ router.get('/getCategories',function(req, res, next){
     });
 });
 
+router.post("/createProduct", function(req, res, next){
+    
+    var productsData = req.body.info;  
+    console.log(JSON.parse(productsData));
+    res.sendStatus(200);
+});
+
 module.exports = router;
