@@ -33,7 +33,7 @@ productsModel.createProductCategory = function(productCategoryData, callback){
     }
 }
 
-productsModel.listProducts = function(){
+productsModel.listProducts = function(callback){
     if(connection){
         connection.query('SELECT * FROM products', function(error, result){
             if(error){

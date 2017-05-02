@@ -54,10 +54,12 @@ router.get("/listProducts", function(req, res){
             console.log("Error:!!!" + error);
             res.render('products/listProducts', {listProducts: [], error: "No hay registro de Productos"});
         } else{
+            console.log("Todo bien hasta ahora");
             var listProducts = [];
             listProducts = response || [];
             console.log("Respuesta:" + response);
             res.render('products/listProducts', {listProducts: listProducts});
+            console.log("Re dirigiendo");
         }
     });
 });

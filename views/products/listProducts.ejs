@@ -36,7 +36,7 @@
                         <td><%= product.name %></td>
                         <td>
                             <form method = "POST" action="/deleteProduct">
-                                <input type="hidden" id="id" name="id" value="<%= hi %>">
+                                <input type="hidden" id="id" name="id" value="<%= product.products_id %>">
                                 <button type="submit" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-trash"> Delete</button>
                             </form>
                         </td>
