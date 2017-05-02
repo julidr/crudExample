@@ -48,4 +48,18 @@ router.post("/createProduct", function(req, res, next){
     res.sendStatus(200);
 });
 
+router.get("/listProducts", function(req, res){
+      productsModel.listProducts(function(error, response){
+        if(error){
+            console.log("Error:!!!" + error);
+            res.render('products/listProducts', {listProducts: [], error: "No hay registro de Productos"});
+        } else{
+            var listProducts = [];
+            listProducts = response || [];
+            console.log("Respuesta:" + response);
+            res.render('products/listProducts', {listProducts: listProducts});
+        }
+    });
+});
+
 module.exports = router;

@@ -1,6 +1,7 @@
 $(document).ready(function(){
     
     $('#categoriesTable').DataTable();
+    $('#productsTable').DataTable();
 
     $('#categoriesTable').on("click",".edit_btn",function(){
         $("#category_id").val($(this).data("code"));
