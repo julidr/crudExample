@@ -45,4 +45,16 @@ productsModel.listProducts = function(callback){
     }
 }
 
+productsModel.listCategoriesProducts = function(callback){
+        if(connection){
+        connection.query('SELECT * FROM products_categories', function(error, result){
+            if(error){
+                callback(error, result);
+            }else{
+                callback(null, result);
+            }
+        });
+    }
+}
+
 module.exports = productsModel;

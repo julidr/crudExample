@@ -51,15 +51,16 @@ router.post("/createProduct", function(req, res, next){
 router.get("/listProducts", function(req, res){
       productsModel.listProducts(function(error, response){
         if(error){
-            console.log("Error:!!!" + error);
             res.render('products/listProducts', {listProducts: [], error: "No hay registro de Productos"});
         } else{
-            console.log("Todo bien hasta ahora");
             var listProducts = [];
             listProducts = response || [];
-            console.log("Respuesta:" + response);
-            res.render('products/listProducts', {listProducts: listProducts});
-            console.log("Re dirigiendo");
+            productsModel.listCategoriesProducts(function(error2, response2){
+                var listCategoriesProducts = [];
+                listCategoriesProducts = response2 || [];
+
+                res.render('products/listProducts', {listProducts: listProducts, listCategoriesProducts: listCategoriesProducts});
+            });
         }
     });
 });
